@@ -14,11 +14,11 @@ class TelegramController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    private string $token = "6158072722:AAEorSAQWz_qgYiKrnrln44ChWSesZgZ3zo";
 
     public function __invoke(Request $request)
     {
-        TelegramService::sendMessage($request);
+        $service = new TelegramService();
+        $service->sendMessage($request);
         return 2;
     }
 }
