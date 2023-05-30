@@ -13,7 +13,7 @@ class TelegramController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    private string $token = "6158072722:AAEorSAQWz_qgYiKrnrln44ChWSesZgZ3zo";
+
 
     public function __invoke(Request $request)
     {
