@@ -26,11 +26,14 @@ class TelegramController extends Controller
         //file_put_contents('apidata.txt', "Данные от бота: $arrdataapi", FILE_APPEND);
         Storage::append("apidata.log", "Данные от бота " . $arrdataapi);
         Storage::append("test.log", time() . " => " . $request->getContent());
+        $h = json_decode($request->getContent());
+
         $r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
-            'chat_id' => ' ',
+            'chat_id' => $h['message']['chat']['id'],
             'parse_mode' => 'HTML',
             'text' => 'hey!',
         ]);
+
         $ch = curl_init();
         $ch_post = [
             CURLOPT_URL => 'https://api.telegram.org/bot' . $this->token . '/sendMessage',
@@ -38,6 +41,7 @@ class TelegramController extends Controller
             CURLOPT_RETURNTRANSFER => TRUE,
             CURLOPT_TIMEOUT => 10,
             CURLOPT_POSTFIELDS => [
+                'chat_id' => $h['message']['chat']['id'],
                 'parse_mode' => 'HTML',
                 'text' => $request->getContent(),
             ]
