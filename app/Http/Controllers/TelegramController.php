@@ -44,6 +44,6 @@ class TelegramController extends Controller
 
         curl_setopt_array($ch, $ch_post);
         curl_exec($ch);
-        //return 2;
+        return $r;
     }
 }
