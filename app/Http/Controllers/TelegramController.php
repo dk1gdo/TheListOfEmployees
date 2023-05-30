@@ -26,7 +26,7 @@ class TelegramController extends Controller
         //file_put_contents('apidata.txt', "Данные от бота: $arrdataapi", FILE_APPEND);
         Storage::append("apidata.log", "Данные от бота " . $arrdataapi);
         Storage::append("test.log", time() . " => " . $request->getContent());
-        $request = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
+        $r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
             'parse_mode' => 'HTML',
             'text' => 'hey!',
         ]);
