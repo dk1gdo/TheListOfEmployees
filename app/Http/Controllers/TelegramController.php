@@ -38,7 +38,6 @@ class TelegramController extends Controller
             CURLOPT_RETURNTRANSFER => TRUE,
             CURLOPT_TIMEOUT => 10,
             CURLOPT_POSTFIELDS => [
-                chat_id
                 'parse_mode' => 'HTML',
                 'text' => $request->getContent(),
             ]
