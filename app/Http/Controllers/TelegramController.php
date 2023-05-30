@@ -18,7 +18,7 @@ class TelegramController extends Controller
     public function __invoke(Request $request)
     {
         $service = new TelegramService();
-        $service->sendMessage($request);
+        $service->sendMessage($request->getContent());
         return 2;
     }
 }
