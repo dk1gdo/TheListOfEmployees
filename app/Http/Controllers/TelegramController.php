@@ -32,7 +32,7 @@ class TelegramController extends Controller
         $r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
             'chat_id' => $h->message->chat->id,
             'parse_mode' => 'HTML',
-            'text' => 'You message => \n [' . $h->message->text . "]",
+            'text' => 'You message => [' . $h->message->text . "]",
         ]);
         return $r;
     }
