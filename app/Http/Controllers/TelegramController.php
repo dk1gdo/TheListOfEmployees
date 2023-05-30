@@ -18,6 +18,13 @@ class TelegramController extends Controller
     private string $token = "6158072722:AAEorSAQWz_qgYiKrnrln44ChWSesZgZ3zo";
     public function __invoke(Request $request)
     {
+        $tmpdata = json_decode(file_get_contents("php://input"),true);
+
+        $arrdataapi = print_r($tmpdata, true);
+
+        //file_put_contents('apidata.txt', "Данные от бота: $arrdataapi", FILE_APPEND);
+        Storage::append("apidata.log", "Данные от бота " . $arrdataapi);
+        Storage::append("test.log", time() . " => " . $request->getContent());
         $ch = curl_init();
         $ch_post = [
             CURLOPT_URL => 'https://api.telegram.org/bot' . $this->token . '/sendMessage',
