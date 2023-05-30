@@ -30,10 +30,10 @@ class TelegramController extends Controller
         $r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
             'chat_id' => $h->message->chat->id,
             'parse_mode' => 'HTML',
-            'text' => 'hey!',
+            'text' => 'You message ' . $h->message->text,
         ]);
 
-        $ch = curl_init();
+       /* $ch = curl_init();
         $ch_post = [
             CURLOPT_URL => 'https://api.telegram.org/bot' . $this->token . '/sendMessage',
             CURLOPT_POST => TRUE,
@@ -44,10 +44,10 @@ class TelegramController extends Controller
                 'parse_mode' => 'HTML',
                 'text' => $request->getContent(),
             ]
-        ];
+        ];*/
 
-        curl_setopt_array($ch, $ch_post);
-        curl_exec($ch);
+        /*curl_setopt_array($ch, $ch_post);
+        curl_exec($ch);*/
         return $r;
     }
 }
