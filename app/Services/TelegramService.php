@@ -5,7 +5,7 @@ namespace App\Services;
 class TelegramService
 {
     private string $token = "6158072722:AAEorSAQWz_qgYiKrnrln44ChWSesZgZ3zo";
-    public function sendMessage() {
+    public function sendMessage($data) {
         $ch = curl_init();
         $ch_post = [
             CURLOPT_URL => 'https://api.telegram.org/bot' . $this->token . '/sendMessage',
@@ -14,7 +14,7 @@ class TelegramService
             CURLOPT_TIMEOUT => 10,
             CURLOPT_POSTFIELDS => [
                 'parse_mode' => 'HTML',
-                'text' => "test text",
+                'text' => $data,
             ]
         ];
 
