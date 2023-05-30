@@ -28,7 +28,7 @@ class TelegramController extends Controller
         $h = json_decode($request->getContent());
 
         $r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
-            'chat_id' => $h['message']['chat']['id'],
+            'chat_id' => $h->message->chat->id,
             'parse_mode' => 'HTML',
             'text' => 'hey!',
         ]);
@@ -40,7 +40,7 @@ class TelegramController extends Controller
             CURLOPT_RETURNTRANSFER => TRUE,
             CURLOPT_TIMEOUT => 10,
             CURLOPT_POSTFIELDS => [
-                'chat_id' => $h['message']['chat']['id'],
+                'chat_id' => $h->message->chat->id,
                 'parse_mode' => 'HTML',
                 'text' => $request->getContent(),
             ]
