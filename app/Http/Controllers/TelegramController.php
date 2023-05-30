@@ -19,6 +19,6 @@ class TelegramController extends Controller
     public function __invoke(Request $request)
     {
         Storage::append("test.log", time() . " => " . $request->getContent());
-        return 1;
+        return 2;
     }
 }
