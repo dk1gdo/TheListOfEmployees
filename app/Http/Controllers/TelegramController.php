@@ -18,6 +18,12 @@ class TelegramController extends Controller
 
     public function __invoke(Request $request)
     {
+        $tmpdata = json_decode(file_get_contents("php://input"),true);
+
+        $arrdataapi = print_r($tmpdata, true);
+
+        //file_put_contents('apidata.txt', "Данные от бота: $arrdataapi", FILE_APPEND);
+        Storage::append("apidata.log", "Данные от бота " . $arrdataapi);
         Storage::append("test.log", time() . " => " . $request->getContent());
         return 2;
     }
