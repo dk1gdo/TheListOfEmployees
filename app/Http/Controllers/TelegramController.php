@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\TelegramService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class TelegramController extends Controller
@@ -25,6 +26,10 @@ class TelegramController extends Controller
         //file_put_contents('apidata.txt', "Данные от бота: $arrdataapi", FILE_APPEND);
         Storage::append("apidata.log", "Данные от бота " . $arrdataapi);
         Storage::append("test.log", time() . " => " . $request->getContent());
+        $request = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
+            'parse_mode' => 'HTML',
+            'text' => 'hey!',
+        ]);
         $ch = curl_init();
         $ch_post = [
             CURLOPT_URL => 'https://api.telegram.org/bot' . $this->token . '/sendMessage',
