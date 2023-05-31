@@ -24,8 +24,8 @@ class TelegramController extends Controller
         if (is_null($h)) return false;
         Storage::append("test.log", time() . " => " . json_decode($h));
 
-        $tg = new Telegram();
-        $tg->sendMessage($h->message->chat->id, $h->message->text);
+        /*$tg = new Telegram();
+        $tg->sendMessage($h->message->chat->id, $h->message->text);*/
         return Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
             'chat_id' => $h->message->chat->id,
             'parse_mode' => 'HTML',
