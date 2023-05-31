@@ -37,6 +37,7 @@ class TelegramController extends Controller
         ]);*/
 
         $tg = new Telegram();
-        return $tg->sendMessage($h->message->chat->id, $h->message->text);
+        $r = $tg->sendMessage($h->message->chat->id, $h->message->text);
+        return $r;
     }
 }
