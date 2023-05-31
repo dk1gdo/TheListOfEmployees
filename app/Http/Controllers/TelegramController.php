@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Telegram;
+use http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,6 +29,7 @@ class TelegramController extends Controller
         Storage::append("test.log", time() . " => " . print_r($h, true));
 
         $tg = new Telegram();
+        if(!isset($h->message->text)) return abort(403, 'Unauthorized action.');
         $r = $tg->sendMessage($h->message->chat->id, $h->message->text);
 
         /*$r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
