@@ -26,11 +26,10 @@ class TelegramController extends Controller
 
         $tg = new Telegram();
         $tg->sendMessage($h->message->chat->id, $h->message->text);
-        /*$r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
+        return Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
             'chat_id' => $h->message->chat->id,
             'parse_mode' => 'HTML',
             'text' => 'You message => [' . $h->message->text . "]",
-        ]);*/
-        return "try";
+        ]);
     }
 }
