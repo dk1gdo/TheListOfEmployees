@@ -27,7 +27,7 @@ class TelegramController extends Controller
         $arrdataapi = print_r($tmpdata, true);
         //file_put_contents('apidata.txt', "Данные от бота: $arrdataapi", FILE_APPEND);
         Storage::append("apidata.log", "Данные от бота " . $arrdataapi);
-        Storage::append("test.log", time() . " => " . $h);
+        Storage::append("test.log", time() . " => " . print_r($h, true);;
 
         $tg = new Telegram();
         $r = $tg->sendMessage($h->message->chat->id, $h->message->text);
