@@ -31,6 +31,6 @@ class TelegramController extends Controller
             'parse_mode' => 'HTML',
             'text' => 'You message => [' . $h->message->text . "]",
         ]);*/
-        //return $r;
+        return "try";
     }
 }
