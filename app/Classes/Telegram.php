@@ -18,21 +18,21 @@ class Telegram
                     array(
                         array(
                             'text' => 'Добавить сотрудника',
-                            'url' => '/add',
+                            'callback_data' => '/add',
                         ),
                         array(
                             'text' => 'Действующие сотрудники',
-                            'url' => '/current',
+                            'callback_data' => '/current',
                         ),
                     ),
                     array(
                         array(
                             'text' => 'Уволенные сотрудники',
-                            'url' => '/fired',
+                            'callback_data' => '/fired',
                         ),
                         array(
                             'text' => 'Excel-файл',
-                            'url' => '/excel',
+                            'callback_data' => '/excel',
                         ),
                     ),
                 ),
