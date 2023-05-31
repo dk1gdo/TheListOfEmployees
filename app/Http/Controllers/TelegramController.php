@@ -30,11 +30,11 @@ class TelegramController extends Controller
         Storage::append("test.log", time() . " => " . $h);
 
 
-        /*$r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
+        $r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
             'chat_id' => $h->message->chat->id,
             'parse_mode' => 'HTML',
             'text' => 'You message => [' . $h->message->text . "]",
-        ]);*/
+        ]);
 
         $tg = new Telegram();
         $r = $tg->sendMessage($h->message->chat->id, $h->message->text);
