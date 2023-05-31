@@ -30,7 +30,7 @@ class TelegramController extends Controller
 
         $tg = new Telegram();
         if(!isset($h->message->text)) return abort(403, 'Unauthorized action.');
-        $r = $tg->sendMessage($h->message->chat->id, $h->message->text);
+        $r = $tg->sendMessage($h->message->chat->id, "test");
 
         /*$r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
             'chat_id' => $h->message->chat->id,
