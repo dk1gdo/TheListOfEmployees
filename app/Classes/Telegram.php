@@ -17,12 +17,20 @@ class Telegram
                 'keyboard' => array(
                     array(
                         array(
-                            'text' => 'Тестовая кнопка 1',
-                            'url' => 'YOUR BUTTON URL',
+                            'text' => 'Добавить сотрудника',
+                            'url' => '/add',
                         ),
                         array(
-                            'text' => 'Тестовая кнопка 2',
-                            'url' => 'YOUR BUTTON URL',
+                            'text' => 'Действующие сотрудники',
+                            'url' => '/current',
+                        ),
+                        array(
+                            'text' => 'Уволенные сотрудники',
+                            'url' => '/fired',
+                        ),
+                        array(
+                            'text' => 'Excel-файл',
+                            'url' => '/excel',
                         ),
                     )
                 ),
