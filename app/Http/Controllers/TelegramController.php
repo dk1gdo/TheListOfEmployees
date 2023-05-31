@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Telegram;
 use App\Services\TelegramService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -21,19 +22,15 @@ class TelegramController extends Controller
     {
         $h = json_decode($request->getContent());
         if (is_null($h)) return false;
-        $tmpdata = json_decode(file_get_contents("php://input"),true);
+        Storage::append("test.log", time() . " => " . json_decode($h));
 
-        $arrdataapi = print_r($tmpdata, true);
-        //file_put_contents('apidata.txt', "Данные от бота: $arrdataapi", FILE_APPEND);
-        Storage::append("apidata.log", "Данные от бота " . $arrdataapi);
-        Storage::append("test.log", time() . " => " . $request->getContent());
-
-
-        $r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
+        $tg = new Telegram();
+        $tg->sendMessage($h->message->chat->id, $h->message->text);
+        /*$r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
             'chat_id' => $h->message->chat->id,
             'parse_mode' => 'HTML',
             'text' => 'You message => [' . $h->message->text . "]",
-        ]);
-        return $r;
+        ]);*/
+        //return $r;
     }
 }
