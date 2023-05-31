@@ -24,6 +24,8 @@ class Telegram
                             'text' => 'Действующие сотрудники',
                             'url' => '/current',
                         ),
+                    ),
+                    array(
                         array(
                             'text' => 'Уволенные сотрудники',
                             'url' => '/fired',
@@ -32,7 +34,7 @@ class Telegram
                             'text' => 'Excel-файл',
                             'url' => '/excel',
                         ),
-                    )
+                    ),
                 ),
                 'one_time_keyboard' => TRUE,
                 'resize_keyboard' => TRUE,
