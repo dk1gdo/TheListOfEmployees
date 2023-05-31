@@ -22,14 +22,19 @@ class TelegramController extends Controller
     {
         $h = json_decode($request->getContent());
         if (is_null($h)) return false;
-        Storage::append("test.log", time() . " => " . json_decode($h));
+        $tmpdata = json_decode(file_get_contents("php://input"),true);
 
-        /*$tg = new Telegram();
-        $tg->sendMessage($h->message->chat->id, $h->message->text);*/
-        return Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
+        $arrdataapi = print_r($tmpdata, true);
+        //file_put_contents('apidata.txt', "Данные от бота: $arrdataapi", FILE_APPEND);
+        Storage::append("apidata.log", "Данные от бота " . $arrdataapi);
+        Storage::append("test.log", time() . " => " . $request->getContent());
+
+
+        $r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
             'chat_id' => $h->message->chat->id,
             'parse_mode' => 'HTML',
             'text' => 'You message => [' . $h->message->text . "]",
         ]);
+        return $r;
     }
 }
