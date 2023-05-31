@@ -13,6 +13,22 @@ class Telegram
             'chat_id' => $chat_id,
             'parse_mode' => 'HTML',
             'text' => 'You message => [' . $message . "]",
+            'reply_markup' => json_encode(array(
+                'keyboard' => array(
+                    array(
+                        array(
+                            'text' => 'Тестовая кнопка 1',
+                            'url' => 'YOUR BUTTON URL',
+                        ),
+                        array(
+                            'text' => 'Тестовая кнопка 2',
+                            'url' => 'YOUR BUTTON URL',
+                        ),
+                    )
+                ),
+                'one_time_keyboard' => TRUE,
+                'resize_keyboard' => TRUE,
+            )),
         ]);
     }
 

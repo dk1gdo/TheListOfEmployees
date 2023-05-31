@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Telegram;
-use App\Services\TelegramService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class TelegramController extends Controller
