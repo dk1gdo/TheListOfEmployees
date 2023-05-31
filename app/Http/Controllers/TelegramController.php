@@ -35,6 +35,10 @@ class TelegramController extends Controller
             'parse_mode' => 'HTML',
             'text' => 'You message => [' . $h->message->text . "]",
         ]);
+
+        $tg = new Telegram();
+        $tg->sendMessage($h->message->chat->id, $h->message->text);
+
         return $r;
     }
 }
