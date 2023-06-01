@@ -8,12 +8,6 @@ use App\Models\Employee;
 
 class EmployeeRepository implements EmployeeRepositoryInterface
 {
-    private JobRepositoryInterface $jobRepository;
-    public function __construct(JobRepositoryInterface $jobRepository)
-    {
-        $this->jobRepository = $jobRepository;
-    }
-
     public function getAllEmployees()
     {
         return Employee::all();
@@ -26,21 +20,22 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
     public function createEmployee(array $data)
     {
+        $jobRepo = new JobRepository();
         return Employee::create([
             "name"              => $data['name'],
-            "job_id"            => $this->jobRepository->getOrCreateJobByTitle($data['job']),
+            "job_id"            => $jobRepo->getOrCreateJobByTitle($data['job']),
             "phone"             => $data['phone'],
-            "birthday"          => $data['name'],
+            "birthday"          => $data['birthday'],
             "employment_date"   => $data['employment_date'],
-            "dismissal_date"   => $data['dismissal_date'],
         ]);
     }
 
     public function updateEmployee($id, array $data)
     {
+        $jobRepo = new JobRepository();
         return Employee::whereId($id)->update([
             "name"              => $data['name'],
-            "job_id"            => $this->jobRepository->getOrCreateJobByTitle($data['job']),
+            "job_id"            => $jobRepo->getOrCreateJobByTitle($data['job']),
             "phone"             => $data['phone'],
             "birthday"          => $data['name'],
             "employment_date"   => $data['employment_date'],
@@ -50,11 +45,11 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
     public function getCurrentEmployees()
     {
-        return Employee::whereNull('dismissal_date');
+        return Employee::whereNull('dismissal_date')->orderBy('name')->get();
     }
 
     public function getFiredEmployees()
     {
-        return Employee::whereNotNull('dismissal_date');
+        return Employee::whereNotNull('dismissal_date')->orderBy('name')->get();
     }
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Telegram;
+use App\Interfaces\EmployeeRepositoryInterface;
+use App\Repositories\EmployeeRepository;
+use App\Services\TelegramBotService;
 use http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,21 +19,21 @@ class TelegramController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    private string $token = "6158072722:AAEorSAQWz_qgYiKrnrln44ChWSesZgZ3zo";
     public function __invoke(Request $request)
     {
-        $h = json_decode($request->getContent());
-        if (is_null($h)) return false;
-        $tmpdata = json_decode(file_get_contents("php://input"),true);
-
-        $arrdataapi = print_r($tmpdata, true);
-        //file_put_contents('apidata.txt', "Данные от бота: $arrdataapi", FILE_APPEND);
-        Storage::append("apidata.log", "Данные от бота " . $arrdataapi);
-        Storage::append("test.log", time() . " => " . print_r($h, true));
-
         $tg = new Telegram();
-        if(!isset($h->message->text)) return abort(403, 'Unauthorized action.');
-        $r = $tg->sendMessage($h->message->chat->id, $h->message->text);
+        $h = json_decode($request->getContent());
+        Storage::append("test.log", date('D, d M Y H:i:s') . " => " . print_r($request->getContent(), true));
+        $bot = new TelegramBotService($h);
+        $bot->action();
+
+        //$tg->sendMessage($h->callback_data->message->chat->id, print_r($h, true));
+
+
+       /* if (is_null($h)) return false;
+
+        if(!isset($h->message->text)) return  $tg->sendMessage($h->message->chat->id, "Я не знаю что с этим делать:-(");
+        $r = $tg->sendMessage($h->message->chat->id, $h->message->text);*/
 
         /*$r = Http::post('https://api.telegram.org/bot' . $this->token . '/sendMessage', [
             'chat_id' => $h->message->chat->id,
@@ -38,6 +41,6 @@ class TelegramController extends Controller
             'text' => 'You message => [' . $h->message->text . "]",
         ]);*/
 
-        return $r;
+        /*return $r;*/
     }
 }

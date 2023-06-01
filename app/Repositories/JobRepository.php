@@ -41,6 +41,6 @@ class JobRepository implements JobRepositoryInterface
         if (is_null($job)) {
             $job = $this->createJob($title);
         }
-        return $job;
+        return $job->id;
     }
 }

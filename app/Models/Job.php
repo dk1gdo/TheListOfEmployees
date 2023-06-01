@@ -9,7 +9,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Job extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'title',
+        ];
+    public $timestamps = false;
     public function employees() {
         return $this->hasMany(Employee::class);
     }
