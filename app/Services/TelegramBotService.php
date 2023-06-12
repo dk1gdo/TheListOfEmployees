@@ -169,6 +169,7 @@ class TelegramBotService
     public function current($chat_id){
         $repo = new EmployeeRepository();
         $employees = $repo->getCurrentEmployees();
+        if(count($employees) == 0) $this->tg->sendMessage($chat_id, "Сотрудников нет(", $this->default_keyboard);
         foreach ($employees as $employee){
             $this->tg->sendMessage($chat_id, "
                 {$employee->name}, должность: {$employee->job->title}, телефон: {$employee->phone}, дата рождения: " .
@@ -196,6 +197,7 @@ class TelegramBotService
     public function fired($chat_id){
         $repo = new EmployeeRepository();
         $employees = $repo->getFiredEmployees();
+        if(count($employees) == 0) $this->tg->sendMessage($chat_id, "Уволенных сотрудников нет)", $this->default_keyboard);
         foreach ($employees as $employee){
             $this->tg->sendMessage($chat_id, "
                 {$employee->name}, должность: {$employee->job->title}, телефон: {$employee->phone}, дата рождения: " .
